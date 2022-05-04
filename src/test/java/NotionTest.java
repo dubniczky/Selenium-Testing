@@ -15,6 +15,9 @@ import java.util.*;
 
 public class NotionTest {
     public WebDriver driver;
+
+    private String userMail = "gohol92357@chokxus.com";
+    private String userPass = "everyone loves a good selenium assignment";
     
     @Before
     public void setup() {
@@ -31,12 +34,19 @@ public class NotionTest {
     }
 
     @Test
-    public void LoginTest() {
+    public void mainTest() {
         MainPage mainPage = new MainPage(this.driver);
 
         Assert.assertTrue( mainPage.getTitle().startsWith("Notion – ") );
         Assert.assertTrue( mainPage.getFooterText().contains("Pricing") );
         Assert.assertTrue( mainPage.getHeaderText().contains("Log in") );
+    }
+
+    @Test
+    public void loginTest() {
+        MainPage mainPage = new MainPage(this.driver);
+        LoginPage loginPage = mainPage.openLoginPage();
+        NotesPage notesPage = loginPage.login(userMail, userPass);
     }
     
     @After

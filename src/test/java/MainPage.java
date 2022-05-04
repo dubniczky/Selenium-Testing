@@ -31,4 +31,10 @@ class MainPage extends PageBase {
     public String getHeaderText() {
         return this.waitAndReturnElement(headerLocator).getText();
     }
+
+    public LoginPage openLoginPage() {
+        waitAndReturnElement(loginButtonLocator).click();
+        wait(10);
+        return new LoginPage(driver);
+    }
 }
