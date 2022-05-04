@@ -20,7 +20,13 @@ public class NotionTest {
     public void setup() {
         WebDriverManager.chromedriver().setup();
 
-        driver = new ChromeDriver();
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--no-sandbox");
+        options.addArguments("--headless");
+        options.addArguments("--disable-dev-shm-usage");
+        options.addArguments("--window-size=1920x1080");
+
+        driver = new ChromeDriver(options);
         driver.manage().window().maximize();
     }
 
@@ -28,7 +34,7 @@ public class NotionTest {
     public void LoginTest() {
         MainPage mainPage = new MainPage(this.driver);
 
-        Assert.assertTrue( mainPage.getTitle() == "asd" );
+        Assert.assertTrue( mainPage.getTitle().startsWith("Notion – ") );
     }
     
     @After
