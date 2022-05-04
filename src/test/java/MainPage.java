@@ -15,11 +15,12 @@ import org.openqa.selenium.NoSuchElementException;
 class MainPage extends PageBase {
 
     private By loginButtonLocator = By.xpath("//a[@href='/login']");
-    private By footerLocator = By.tagName("footer");
+    private By footerLocator = By.xpath("//footer");
+    private String url = "https://notion.so";
     
     public MainPage(WebDriver driver) {
         super(driver);
-        this.driver.get("https://notion.so/");
+        this.driver.get(url);
     }
 
     public String getFooterText() {
