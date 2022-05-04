@@ -14,7 +14,7 @@ import org.openqa.selenium.NoSuchElementException;
 
 class PageBase {
     protected WebDriver driver;
-    protected WebDriverWait wait;    
+    protected WebDriverWait wait;
     
     public PageBase(WebDriver driver) {
         this.driver = driver;
@@ -29,5 +29,9 @@ class PageBase {
     public String getBodyText() {
         WebElement bodyElement = this.waitAndReturnElement(By.tagName("body"));
         return bodyElement.getText();
+    }
+
+    public String getTitle() {
+        return driver.getTitle();
     }
 }
