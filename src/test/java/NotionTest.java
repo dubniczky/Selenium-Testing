@@ -35,6 +35,8 @@ public class NotionTest {
         MainPage mainPage = new MainPage(this.driver);
 
         Assert.assertTrue( mainPage.getTitle().startsWith("Notion – ") );
+        Assert.assertTrue( mainPage.getFooterText().contains("Pricing") );
+        Assert.assertTrue( mainPage.getHeaderText().contains("Log in") );
     }
     
     @After
