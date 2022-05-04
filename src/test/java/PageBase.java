@@ -9,7 +9,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.support.ui.Duration;
 
 
 class PageBase {
@@ -33,5 +33,16 @@ class PageBase {
 
     public String getTitle() {
         return driver.getTitle();
+    }
+
+    public void wait(int timeout)
+    {
+        /*
+        WebDriverWait w = new WebDriverWait(driver, Duration.ofSeconds(timeout));
+        w.until(webDriver -> "complete".equals(((JavascriptExecutor) webDriver)
+            .executeScript("return document.readyState")));
+        */
+
+        WebElement element = (new WebDriverWait(driver, timeout)).until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("body")));
     }
 }
