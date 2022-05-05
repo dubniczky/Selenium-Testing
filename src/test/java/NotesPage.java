@@ -15,6 +15,7 @@ public class NotesPage extends PageBase {
 
     private By sidebarToggler = By.className("notion-sidebar-switcher");
     private By logoutButton = By.xpath("//div[text()='Log out all']");
+    private By settingsButtonLocator = By.xpath("//div[text()='Settings & Members']");
 
     NotesPage(WebDriver driver) { 
         super(driver);
@@ -29,5 +30,10 @@ public class NotesPage extends PageBase {
 
     public String togglerText() {
         return waitAndReturnElement(sidebarToggler).getText();
+    }
+
+    public SettingsPage openSettingsPage() {
+        waitAndReturnElement(settingsButtonLocator).click();
+        return new SettingsPage(driver);
     }
 }

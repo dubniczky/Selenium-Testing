@@ -10,24 +10,27 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
-import java.util.*;  
+import java.util.*;
+import java.util.Random;
 
 
 public class NotionTest {
     public WebDriver driver;
+    public Random random;
 
     private String userMail = "gohol92357@chokxus.com";
     private String userPass = "everyone loves a good selenium assignment";
     
     @Before
     public void setup() {
+        random = new Random();
         WebDriverManager.chromedriver().setup();
 
         ChromeOptions options = new ChromeOptions();
-        options.addArguments("--no-sandbox");
-        options.addArguments("--headless");
-        options.addArguments("--disable-dev-shm-usage");
-        options.addArguments("--window-size=1920x1080");
+        //options.addArguments("--no-sandbox");
+        //options.addArguments("--headless");
+        //options.addArguments("--disable-dev-shm-usage");
+        //options.addArguments("--window-size=1920x1080");
 
         driver = new ChromeDriver(options);
         driver.manage().window().maximize();
@@ -48,7 +51,26 @@ public class NotionTest {
         LoginPage loginPage = mainPage.openLoginPage();
         NotesPage notesPage = loginPage.login(userMail, userPass);
 
-        Assert.assertTrue( notesPage.toggerText() == "Selenium's Notion" );
+        Assert.assertTrue( notesPage.togglerText().contains("Selenium's Notion") );
+
+        mainPage = notesPage.logout();
+    }
+
+    @Test
+    public void settingsTest() {
+        MainPage mainPage = new MainPage(this.driver);
+        LoginPage loginPage = mainPage.openLoginPage();
+        NotesPage notesPage = loginPage.login(userMail, userPass);
+        SettingsPage settingsPage = notesPage.openSettingsPage();
+
+        String newName = "Selenium - " + Math.abs(random.nextInt());
+        settingsPage.updateDisplayName(newName);
+
+        settingsPage = notesPage.openSettingsPage();
+
+        //System.out.println(settingsPage.getDisplayName());
+
+        Assert.assertTrue( settingsPage.getDisplayName().equals(newName) );
 
         mainPage = notesPage.logout();
     }
