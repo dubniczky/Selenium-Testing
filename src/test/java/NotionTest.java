@@ -4,14 +4,18 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import java.util.Random;
+import java.util.Properties;
+import java.io.FileInputStream;
 
 
 public class NotionTest {
     public WebDriver driver;
     public Random random;
+    public Properties props;
 
-    private String userMail = "gohol92357@chokxus.com";
-    private String userPass = "everyone loves a good selenium assignment";
+    private String userMail;
+    private String userPass;
+    
 
     private PagePair[] pagePairs = new PagePair[] {
         new PagePair("https://www.notion.so/", "One workspace."),
@@ -19,18 +23,47 @@ public class NotionTest {
         new PagePair("https://www.notion.so/pricing", "Macedonian Makako", false),
         new PagePair("https://www.notion.so/enterprise", "One tool for your entire company to share"),
     };
+
+    public Boolean proptrue(String name) {
+        String val = props.getProperty(name);
+        return val == null || !val.equals("true");
+    }
+
+    public String propstr(String name) {
+        return props.getProperty(name);
+    }
     
     @Before
     public void setup() {
         random = new Random();
         WebDriverManager.chromedriver().setup();
 
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--no-sandbox");
-        options.addArguments("--headless");
-        options.addArguments("--disable-dev-shm-usage");
-        options.addArguments("--window-size=1920x1080");
+        //Load config
+        props = new Properties();
+        try {
+            props.load(new FileInputStream("test.conf"));
+        } catch (Exception e) {
+            Assert.fail();
+        }
 
+        //Setup chrome
+        ChromeOptions options = new ChromeOptions();
+        if (!proptrue("sandbox")) {
+            options.addArguments("--no-sandbox");
+        }
+        if (proptrue("headless")) {
+            options.addArguments("--headless");
+        }
+        if (!proptrue("devshm")) {
+            options.addArguments("--disable-dev-shm-usage");
+        }
+
+        options.addArguments("--window-size=" + propstr("window.width") + "x" + propstr("window.height"));
+
+        userMail = propstr("user.mail");
+        userPass = propstr("user.pass");
+
+        // Init chrome driver
         driver = new ChromeDriver(options);
         driver.manage().window().maximize();
     }
