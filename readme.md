@@ -1,7 +1,35 @@
 # Selenium Website Testing
 
-## Test website information
+Testing websites in containers using selenium framework and chrome engine
 
-URL: `https://www.notion.so`
-Email: `gohol92357@chokxus.com`
-Pass: `everyone loves a good selenium assignment`
+## Usage Instructions
+
+### Running using containers
+
+Build container
+
+```bash
+docker build -t selenium-test .
+```
+
+Run container
+
+```bash
+docker run selenium-test
+```
+
+### Running locally
+
+Install dependencies
+
+```bash
+gradle dependencies
+```
+
+Run tests
+
+```bash
+gradle dependencies
+```
+
+If you'd like to see the browser while testing, edit `test.conf` to set headless to false.
