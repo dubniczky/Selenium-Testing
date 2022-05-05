@@ -20,6 +20,13 @@ public class NotionTest {
 
     private String userMail = "gohol92357@chokxus.com";
     private String userPass = "everyone loves a good selenium assignment";
+
+    private PagePair[] pagePairs = new PagePair[] {
+        new PagePair("https://www.notion.so/", "One workspace."),
+        new PagePair("https://www.notion.so/templates", "Template Gallery"),        
+        new PagePair("https://www.notion.so/pricing", "Macedonian Makako", false),
+        new PagePair("https://www.notion.so/enterprise", "One tool for your entire company to share"),
+    };
     
     @Before
     public void setup() {
@@ -36,7 +43,7 @@ public class NotionTest {
         driver.manage().window().maximize();
     }
 
-    @Test
+    //@Test
     public void mainTest() {
         MainPage mainPage = new MainPage(this.driver);
 
@@ -45,7 +52,7 @@ public class NotionTest {
         Assert.assertTrue( mainPage.getHeaderText().contains("Log in") );
     }
 
-    @Test
+    //@Test
     public void loginTest() {
         MainPage mainPage = new MainPage(this.driver);
         LoginPage loginPage = mainPage.openLoginPage();
@@ -56,7 +63,7 @@ public class NotionTest {
         mainPage = notesPage.logout();
     }
 
-    @Test
+    //@Test
     public void settingsTest() {
         MainPage mainPage = new MainPage(this.driver);
         LoginPage loginPage = mainPage.openLoginPage();
@@ -73,6 +80,22 @@ public class NotionTest {
         Assert.assertTrue( settingsPage.getDisplayName().equals(newName) );
 
         mainPage = notesPage.logout();
+    }
+
+    @Test
+    public void multiTest() {
+        MultiPage multiPage = new MultiPage(this.driver);
+
+        for (PagePair pagePair : pagePairs) {
+            //System.out.println(pagePair.url);
+            if (pagePair.contain) {
+                Assert.assertTrue( multiPage.pageContains(pagePair.url, pagePair.text) );
+            }
+            else {
+                Assert.assertFalse( multiPage.pageContains(pagePair.url, pagePair.text) );
+            }
+        }
+        
     }
     
     @After
