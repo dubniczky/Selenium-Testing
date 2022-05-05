@@ -2,6 +2,12 @@
 
 Testing websites in containers using selenium framework and chrome engine
 
+## Required software
+
+- Java Development Kit
+- Gradle
+- (Docker)
+
 ## Usage Instructions
 
 ### Running using containers
