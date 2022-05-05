@@ -26,7 +26,7 @@ public class LoginPage extends PageBase {
     public NotesPage login(String mail, String pass) {
         waitAndReturnElement(emailInputLocator).sendKeys(mail);
         waitAndReturnElement(continueButtonLocator).click();
-        waitAndReturnElement(passwdInputLocator).sendKeys(mail);
+        waitAndReturnElement(passwdInputLocator).sendKeys(pass);
         waitAndReturnElement(submitButtonLocator).click();
         wait(10);
         return new NotesPage(driver);

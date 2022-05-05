@@ -27,7 +27,7 @@ public class NotesPage extends PageBase {
         return new MainPage(driver);
     }
 
-    public String toggerText() {
+    public String togglerText() {
         return waitAndReturnElement(sidebarToggler).getText();
     }
 }
