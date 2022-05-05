@@ -68,7 +68,7 @@ public class NotionTest {
         driver.manage().window().maximize();
     }
 
-    //@Test
+    @Test
     public void mainTest() {
         MainPage mainPage = new MainPage(this.driver);
 
@@ -77,7 +77,7 @@ public class NotionTest {
         Assert.assertTrue( mainPage.getHeaderText().contains("Log in") );
     }
 
-    //@Test
+    @Test
     public void loginTest() {
         MainPage mainPage = new MainPage(this.driver);
         LoginPage loginPage = mainPage.openLoginPage();
@@ -88,7 +88,7 @@ public class NotionTest {
         mainPage = notesPage.logout();
     }
 
-    //@Test
+    @Test
     public void settingsTest() {
         MainPage mainPage = new MainPage(this.driver);
         LoginPage loginPage = mainPage.openLoginPage();
