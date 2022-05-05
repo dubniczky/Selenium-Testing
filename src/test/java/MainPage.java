@@ -7,6 +7,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.*;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
@@ -22,6 +23,8 @@ class MainPage extends PageBase {
     public MainPage(WebDriver driver) {
         super(driver);
         this.driver.get(url);
+
+        driver.manage().addCookie(new Cookie("notion_check_cookie_consent", "false"));
     }
 
     public String getFooterText() {
