@@ -47,6 +47,10 @@ public class NotionTest {
         MainPage mainPage = new MainPage(this.driver);
         LoginPage loginPage = mainPage.openLoginPage();
         NotesPage notesPage = loginPage.login(userMail, userPass);
+
+        Assert.assertTrue( notesPage.toggerText() == "Selenium's Notion" );
+
+        mainPage = notesPage.logout();
     }
     
     @After

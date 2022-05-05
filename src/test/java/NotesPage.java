@@ -13,8 +13,21 @@ import org.openqa.selenium.NoSuchElementException;
 
 public class NotesPage extends PageBase {
 
-    NotesPage(WebDriver driver) {
+    private By sidebarToggler = By.className("notion-sidebar-switcher");
+    private By logoutButton = By.xpath("//div[text()='Log out all']");
+
+    NotesPage(WebDriver driver) { 
         super(driver);
     }
-    
+
+    public MainPage logout() {
+        waitAndReturnElement(sidebarToggler).click();
+        waitAndReturnElement(logoutButton).click();
+        wait(10);
+        return new MainPage(driver);
+    }
+
+    public String toggerText() {
+        return waitAndReturnElement(sidebarToggler).getText();
+    }
 }
