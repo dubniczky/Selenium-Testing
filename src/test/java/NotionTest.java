@@ -26,7 +26,10 @@ public class NotionTest {
 
     public Boolean proptrue(String name) {
         String val = props.getProperty(name);
-        return val == null || !val.equals("true");
+        if (val == null || !val.equals("true")) {
+            return false;
+        }
+        return true;
     }
 
     public String propstr(String name) {
