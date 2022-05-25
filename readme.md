@@ -44,3 +44,9 @@ If you'd like to see the browser while testing, edit `test.conf` to set headless
 ## JMeter Instructions
 
 The `jmeter` folder contains the JMeter tests. Currenty there is a spike test using 3 threads of 15 requests. For real-world use this should be higher.
+
+## Disclaimer
+
+I in no way promote or take accountability for your use of this software. Only use for sites where you have explicit permission to use bots and test performance.
+
+`notion.so` is not associated or gave no permission to use this on their system, so modify each orrucence of their URL to your own target before use.
